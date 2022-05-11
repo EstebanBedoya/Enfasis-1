@@ -1,6 +1,6 @@
 /**
  * @description
- * This is the notification library.
+ * Libreria de notificaciones
  * @author EstebanBedoya - Valter Zuliani - Estiven Cano
  */
 export default class Notificador {
@@ -45,6 +45,7 @@ class CreadorOpciones {
     facebook: (params: string[]) => new OpcionFacebook(params),
   };
 
+  // Almacena las opciones instanciadas en un array
   opciones: Opcion[] | undefined;
 
   constructor(creador?: CreadorOpciones) {
@@ -57,7 +58,10 @@ class CreadorOpciones {
     return Object.keys(this.listaOpciones);
   }
 
-  // Método para añadir las opciones en base a la lista de destinatarios
+  /**
+   * Método para añadir las opciones en base a la lista de destinatarios
+   * @param opcionDestinatario: OpcionDestinatario[]
+   */
   añadirOpciones(opcionDestinatario: OpcionDestinatario[]) {
     this.opciones = opcionDestinatario.map(({ opcion, destinatarios }) =>
       this.listaOpciones[opcion](destinatarios)
@@ -65,7 +69,7 @@ class CreadorOpciones {
   }
 }
 
-// Interfaz opción que envia el mensaje según el tipo de opción y adicióna los destinatarios
+// Interfaz opción que envia el mensaje según el tipo de opción y adiciona los destinatarios
 interface Opcion {
   destinatarios: string[];
   enviar(mensaje: string): void;
