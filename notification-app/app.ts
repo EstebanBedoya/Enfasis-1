@@ -9,8 +9,20 @@ class Aplicacion {
       "opciones de envio de mensaje: " + this.notificador.listarOpciones()
     );
 
-    this.notificador.addOpciones(["sms", "email"]);
-    this.notificador.addDestinatarios(["ebedoya", "valete", "estive"]);
+    this.notificador.añadirOpciones([
+      {
+        opcion: "sms",
+        destinatarios: ["+56912345678", "+56987654321"],
+      },
+      {
+        opcion: "email",
+        destinatarios: ["estivencano99@gmail.com"],
+      },
+      {
+        opcion: "facebook",
+        destinatarios: ["estiven"],
+      },
+    ]);
     this.notificador.enviar("holi bro");
   }
 }
