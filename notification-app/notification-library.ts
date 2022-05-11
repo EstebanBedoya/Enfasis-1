@@ -64,7 +64,6 @@ class CreadorOpciones {
 interface Opcion {
   destinatarios: string[];
   enviar(mensaje: string): void;
-  addDestinatarios(destinatarios: string[]): void;
 }
 
 class OpcionSMS implements Opcion {
@@ -77,10 +76,6 @@ class OpcionSMS implements Opcion {
   enviar(mensaje: string): void {
     console.log(`mensaje enviado pos sms: ${mensaje}`);
     console.log(`destinatarios: ${this.destinatarios}`);
-  }
-
-  addDestinatarios(destinatarios: string[]): void {
-    this.destinatarios = destinatarios;
   }
 }
 
@@ -95,10 +90,6 @@ class OpcionEmail implements Opcion {
     console.log(`mensaje enviado por email: ${mensaje}`);
     console.log(`destinatarios: ${this.destinatarios}`);
   }
-
-  addDestinatarios(destinatarios: string[]): void {
-    this.destinatarios = destinatarios;
-  }
 }
 
 class OpcionFacebook implements Opcion {
@@ -111,9 +102,5 @@ class OpcionFacebook implements Opcion {
   enviar(mensaje: string): void {
     console.log(`mensaje enviado a facebook: ${mensaje}`);
     console.log(`destinatarios: ${this.destinatarios}`);
-  }
-
-  addDestinatarios(destinatarios: string[]): void {
-    this.destinatarios = destinatarios;
   }
 }
