@@ -4,28 +4,29 @@
  * @author EstebanBedoya - Valter Zuliani - Estiven Cano
  */
 export default class Notificador {
-  opciones: string[] | undefined;
   private creadorOpciones: CreadorOpciones = new CreadorOpciones();
 
-  constructor(notificador?: Notificador) {
-    if (notificador) {
-      this.opciones = notificador.opciones;
-    }
-  }
+  constructor() {}
 
-  // Método para enviar mensaje a cada una de las opciones en el creador de opciones.
+  /**Método para enviar mensaje a cada una de las opciones en el creador de opciones.
+   * @param mensaje: string
+   */
   enviar(mensaje: string) {
     this.creadorOpciones.opciones?.forEach((opcion) => {
       opcion.enviar(mensaje);
     });
   }
 
-  // Método para listar las opciones en el creador de opciones.
+  /** Método para listar las opciones en el creador de opciones.
+   * @returns string[]
+   *  */
   listarOpciones(): string[] {
     return this.creadorOpciones.getOpciones;
   }
-    
-  // Método para añadir las opciones de la lista de destinatarios
+
+  /** Método para añadir las opciones de la lista de destinatarios
+   * @param opcionDestinatario: OpcionDestinatario[]
+   */
   añadirOpciones(opcionDestinatario: OpcionDestinatario[]) {
     this.creadorOpciones.añadirOpciones(opcionDestinatario);
   }
@@ -55,7 +56,7 @@ class CreadorOpciones {
   get getOpciones(): string[] {
     return Object.keys(this.listaOpciones);
   }
-  
+
   // Método para añadir las opciones en base a la lista de destinatarios
   añadirOpciones(opcionDestinatario: OpcionDestinatario[]) {
     this.opciones = opcionDestinatario.map(({ opcion, destinatarios }) =>
@@ -64,13 +65,13 @@ class CreadorOpciones {
   }
 }
 
- // Interfaz opción que envia el mensaje según el tipo de opción y adicióna los destinatarios
+// Interfaz opción que envia el mensaje según el tipo de opción y adicióna los destinatarios
 interface Opcion {
   destinatarios: string[];
   enviar(mensaje: string): void;
 }
 
- // Al crear un clase objeto tipo mensaje con el respectivo destinatario y envia el mensaje junto con el destinatario
+// Al crear un clase objeto tipo mensaje con el respectivo destinatario y envia el mensaje junto con el destinatario
 class OpcionSMS implements Opcion {
   destinatarios: string[] = [];
 
@@ -84,7 +85,7 @@ class OpcionSMS implements Opcion {
   }
 }
 
- // Al crear un clase objeto tipo Email con el respectivo destinatario y envia el mensaje junto con el destinatario
+// Al crear un clase objeto tipo Email con el respectivo destinatario y envia el mensaje junto con el destinatario
 class OpcionEmail implements Opcion {
   destinatarios: string[] = [];
 
@@ -98,7 +99,7 @@ class OpcionEmail implements Opcion {
   }
 }
 
- // Al crear un clase objeto tipo Facebook con el respectivo destinatario y envia el mensaje junto con el destinatario
+// Al crear un clase objeto tipo Facebook con el respectivo destinatario y envia el mensaje junto con el destinatario
 class OpcionFacebook implements Opcion {
   destinatarios: string[] = [];
 
