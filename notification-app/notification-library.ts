@@ -25,7 +25,6 @@ export default class Notificador {
     return this.creadorOpciones.getOpciones;
   }
 
-  //
   añadirOpciones(opcionDestinatario: OpcionDestinatario[]) {
     this.creadorOpciones.añadirOpciones(opcionDestinatario);
   }
