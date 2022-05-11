@@ -24,7 +24,8 @@ export default class Notificador {
   listarOpciones(): string[] {
     return this.creadorOpciones.getOpciones;
   }
-
+    
+  // Método para añadir las opciones de la lista de destinatarios
   añadirOpciones(opcionDestinatario: OpcionDestinatario[]) {
     this.creadorOpciones.añadirOpciones(opcionDestinatario);
   }
@@ -35,6 +36,7 @@ interface OpcionDestinatario {
   destinatarios: string[];
 }
 
+// Clase para definir el tipo de opción mediante listas y añade opciones a estas dependiendo del tipo
 class CreadorOpciones {
   private listaOpciones: any = {
     sms: (params: string[]) => new OpcionSMS(params),
@@ -53,7 +55,8 @@ class CreadorOpciones {
   get getOpciones(): string[] {
     return Object.keys(this.listaOpciones);
   }
-
+  
+  // Método para añadir las opciones en base a la lista de destinatarios
   añadirOpciones(opcionDestinatario: OpcionDestinatario[]) {
     this.opciones = opcionDestinatario.map(({ opcion, destinatarios }) =>
       this.listaOpciones[opcion](destinatarios)
@@ -61,11 +64,13 @@ class CreadorOpciones {
   }
 }
 
+ // Interfaz opción que envia el mensaje según el tipo de opción y adicióna los destinatarios
 interface Opcion {
   destinatarios: string[];
   enviar(mensaje: string): void;
 }
 
+ // Al crear un clase objeto tipo mensaje con el respectivo destinatario y envia el mensaje junto con el destinatario
 class OpcionSMS implements Opcion {
   destinatarios: string[] = [];
 
@@ -79,6 +84,7 @@ class OpcionSMS implements Opcion {
   }
 }
 
+ // Al crear un clase objeto tipo Email con el respectivo destinatario y envia el mensaje junto con el destinatario
 class OpcionEmail implements Opcion {
   destinatarios: string[] = [];
 
@@ -92,6 +98,7 @@ class OpcionEmail implements Opcion {
   }
 }
 
+ // Al crear un clase objeto tipo Facebook con el respectivo destinatario y envia el mensaje junto con el destinatario
 class OpcionFacebook implements Opcion {
   destinatarios: string[] = [];
 
